@@ -1,4 +1,4 @@
-# Vehicle Showroom Management System
+# Vehicle Management System (In progress)
 
 A console-based C++ project for managing a vehicle showroom.
 
