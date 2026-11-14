@@ -11,6 +11,7 @@ class Vehicle{
     bool available;
 
     public:
+    virtual void displayDetails()=0;
     Vehicle(){
         vehicle_id=0;
         brand="";
@@ -37,7 +38,7 @@ class Vehicle{
     void updatePrice(float price){
         this->price=price;
     }
-    virtual void displayDetails(){
+    void displayBasicDetails(){
         cout << "\nVehicle ID: " << vehicle_id;
         cout << "\nBrand: " << brand;
         cout << "\nModel: " << model;
@@ -94,7 +95,7 @@ class Car : public Vehicle, public Insurable{
         fuel_type=f;
     }
     void displayDetails() override{
-        Vehicle::displayDetails();
+        displayBasicDetails();
         cout<<"\nFuel Type: "<<fuel_type;
         displayDetails_insurance();
         cout<<endl;
@@ -109,7 +110,7 @@ class Bike : public Vehicle{
         engine_capacity=e;
     }
     void displayDetails() override{
-        Vehicle::displayDetails();
+        displayBasicDetails();
         cout<<"\nEngine Capacity: "<<engine_capacity<<endl;
     }
 };
@@ -121,7 +122,7 @@ class Scooter : public Vehicle{
         type=t;
     }
     void displayDetails() override{
-        Vehicle::displayDetails();
+        displayBasicDetails();
         cout<<"\nType: "<<type<<endl;
     }
 };
@@ -184,7 +185,7 @@ int main(){
     c.SearchVehicle(101);
     c.SearchVehicle("suzuki");
     c.SearchVehicle("Honda","City");
-    //Method overriding
+    //Method overriding 
     Car c(101, "Honda", "City", 1500000, "Petrol");
     Bike b(102, "Bajaj", "Pulsar", 100000, 120);
     Scooter s(103, "Honda", "Activa", 70000, "Petrol");
@@ -198,13 +199,20 @@ int main(){
     v = &b;
     v->displayDetails();
     v = &s;
-    v->displayDetails();*/
+    v->displayDetails();
     //this pointer
     Car c(101, "Honda", "City", 150000, "Petrol");
     cout<<"\nBefore updating price";
     c.displayDetails();
     cout<<"\nAfter updating price";
     c.updatePrice(100000);
+    c.displayDetails();*/
+    //Abstract class
+    Car c(101, "Honda", "City", 150000, "Petrol");
     c.displayDetails();
+    //if v object is created using vehicle class it will give error
+    //because it is a abstract class and abstract class cannot create objects
+    //Vehicle v(101, "Honda", "City", 150000);
+    //v.displayBasicDetails();
     return 0;
 }
