@@ -34,6 +34,9 @@ class Vehicle{
     void setAvailability(bool status){
         available=status;
     }
+    void updatePrice(float price){
+        this->price=price;
+    }
     virtual void displayDetails(){
         cout << "\nVehicle ID: " << vehicle_id;
         cout << "\nBrand: " << brand;
@@ -181,7 +184,7 @@ int main(){
     c.SearchVehicle(101);
     c.SearchVehicle("suzuki");
     c.SearchVehicle("Honda","City");
-    //Method overriding*/
+    //Method overriding
     Car c(101, "Honda", "City", 1500000, "Petrol");
     Bike b(102, "Bajaj", "Pulsar", 100000, 120);
     Scooter s(103, "Honda", "Activa", 70000, "Petrol");
@@ -195,6 +198,13 @@ int main(){
     v = &b;
     v->displayDetails();
     v = &s;
-    v->displayDetails();
+    v->displayDetails();*/
+    //this pointer
+    Car c(101, "Honda", "City", 150000, "Petrol");
+    cout<<"\nBefore updating price";
+    c.displayDetails();
+    cout<<"\nAfter updating price";
+    c.updatePrice(100000);
+    c.displayDetails();
     return 0;
 }
