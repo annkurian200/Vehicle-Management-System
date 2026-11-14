@@ -42,6 +42,21 @@ class Vehicle{
         cout << "\nAvailability: "
              << (available ? "Available" : "Not Available");
     }
+    void SearchVehicle(int id){
+        if(vehicle_id==id){
+            displayDetails();
+        }
+    }
+    void SearchVehicle(string b){
+        if(brand==b){
+            displayDetails();
+        }
+    }
+    void SearchVehicle(string b,string m){
+        if(brand==b && model==m){
+            displayDetails();
+        }
+    }
 };
 
 class Insurable {
@@ -148,7 +163,7 @@ class PremiumCar :public Car,public PremiumFeatures{
 };
 
 int main(){
-    Scooter s(1234,"Activa","120M",70000,"Petrol");
+    /*Scooter s(1234,"Activa","120M",70000,"Petrol");
     s.displayDetails_scooter();
     Car c(0001,"honda","TSK20",300000,"Petrol");
     c.Vehicle::setAvailability(false);
@@ -160,7 +175,10 @@ int main(){
     ElectricCar e(0001,"honda","TSK20",300000,"No fuel",90);
     e.displayDetails_electricCar();
     PremiumCar pc(101, "Honda", "City", 1500000, "Petrol");
-    pc.displayPremiumCarDetails();
+    pc.displayPremiumCarDetails();*/
+    Car c(101, "Honda", "City", 1500000, "Petrol");
+    c.SearchVehicle(101);
+    c.SearchVehicle("suzuki");
+    c.SearchVehicle("Honda","City");
     return 0;
-    
 }
