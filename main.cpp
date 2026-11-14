@@ -64,11 +64,22 @@ class Vehicle{
 };
 
 class Insurable {
+    public:
+    virtual bool isInsuranceAvailable()=0;
+
+    virtual void setAvailability(bool status)=0;
+    virtual void displayDetails_insurance()=0;
+    virtual ~Insurable(){}
+};
+
+class Car : public Vehicle, public Insurable{
     private:
+    string fuel_type;
     bool insurance;
     int insurance_cost;
     public:
-    Insurable(){
+    Car(int id, string b, string m,float p,string f): Vehicle(id,b,m,p),Insurable(){
+        fuel_type=f;
         insurance=true;
         insurance_cost=2000;
     }
@@ -83,16 +94,6 @@ class Insurable {
         cout << "\nInsurance Availability: "
              << (insurance ? "Available" : "Not Available");
         cout<<"\nInsurance cost : Rs. "<<insurance_cost;
-    }
-
-};
-
-class Car : public Vehicle, public Insurable{
-    private:
-    string fuel_type;
-    public:
-    Car(int id, string b, string m,float p,string f): Vehicle(id,b,m,p),Insurable(){
-        fuel_type=f;
     }
     void displayDetails() override{
         displayBasicDetails();
@@ -210,6 +211,9 @@ int main(){
     //Abstract class
     Car c(101, "Honda", "City", 150000, "Petrol");
     c.displayDetails();
+    //interface pointer
+    Insurable* i =&c;
+    i->displayDetails_insurance();
     //if v object is created using vehicle class it will give error
     //because it is a abstract class and abstract class cannot create objects
     //Vehicle v(101, "Honda", "City", 150000);
