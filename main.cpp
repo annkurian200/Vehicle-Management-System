@@ -34,7 +34,7 @@ class Vehicle{
     void setAvailability(bool status){
         available=status;
     }
-    void displayDetails(){
+    virtual void displayDetails(){
         cout << "\nVehicle ID: " << vehicle_id;
         cout << "\nBrand: " << brand;
         cout << "\nModel: " << model;
@@ -90,8 +90,8 @@ class Car : public Vehicle, public Insurable{
     Car(int id, string b, string m,float p,string f): Vehicle(id,b,m,p),Insurable(){
         fuel_type=f;
     }
-    void displayDetails_car(){
-        displayDetails();
+    void displayDetails() override{
+        Vehicle::displayDetails();
         cout<<"\nFuel Type: "<<fuel_type;
         displayDetails_insurance();
         cout<<endl;
@@ -105,8 +105,8 @@ class Bike : public Vehicle{
     Bike(int id, string b, string m,float p,int e): Vehicle(id,b,m,p){
         engine_capacity=e;
     }
-    void displayDetails_bike(){
-        displayDetails();
+    void displayDetails() override{
+        Vehicle::displayDetails();
         cout<<"\nEngine Capacity: "<<engine_capacity<<endl;
     }
 };
@@ -117,8 +117,8 @@ class Scooter : public Vehicle{
     Scooter(int id, string b, string m,float p,string t): Vehicle(id,b,m,p){
         type=t;
     }
-    void displayDetails_scooter(){
-        displayDetails();
+    void displayDetails() override{
+        Vehicle::displayDetails();
         cout<<"\nType: "<<type<<endl;
     }
 };
@@ -130,8 +130,8 @@ class ElectricCar:public Car{
     ElectricCar(int id, string b, string m,float p,string f,float km):Car(id,b,m,p,f){
         kilometers=km;
     }
-    void displayDetails_electricCar(){
-        displayDetails_car();
+    void displayDetails() override{
+        Car::displayDetails();
         cout<<"Electric Car Kilometers : "<<kilometers;
         cout<<endl;
     }
@@ -157,7 +157,7 @@ class PremiumCar :public Car,public PremiumFeatures{
     PremiumCar(int id, string b, string m,float p,string f):Car(id,b,m,p,f),PremiumFeatures(){
     }
     void displayPremiumCarDetails(){
-        displayDetails_car();
+        Car::displayDetails();
         displayPremiumFeatures();
     }
 };
@@ -175,10 +175,26 @@ int main(){
     ElectricCar e(0001,"honda","TSK20",300000,"No fuel",90);
     e.displayDetails_electricCar();
     PremiumCar pc(101, "Honda", "City", 1500000, "Petrol");
-    pc.displayPremiumCarDetails();*/
+    pc.displayPremiumCarDetails();
+    //Method overloading
     Car c(101, "Honda", "City", 1500000, "Petrol");
     c.SearchVehicle(101);
     c.SearchVehicle("suzuki");
     c.SearchVehicle("Honda","City");
+    //Method overriding*/
+    Car c(101, "Honda", "City", 1500000, "Petrol");
+    Bike b(102, "Bajaj", "Pulsar", 100000, 120);
+    Scooter s(103, "Honda", "Activa", 70000, "Petrol");
+    //c.displayDetails();
+    //b.displayDetails();
+    //s.displayDetails();
+    //runtime polymorphism
+    Vehicle* v;
+    v = &c;
+    v->displayDetails();
+    v = &b;
+    v->displayDetails();
+    v = &s;
+    v->displayDetails();
     return 0;
 }
