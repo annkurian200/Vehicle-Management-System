@@ -122,6 +122,31 @@ class ElectricCar:public Car{
     }
 };
 
+class PremiumFeatures{
+    private:
+    bool sunroof;
+    bool leatherSeats;
+    public:
+    PremiumFeatures(){
+        sunroof=true;
+        leatherSeats=true;
+    }
+    void displayPremiumFeatures(){
+        cout<<"\nSunroof Available : "<<(sunroof ? "Available": "Not Available");
+        cout<<"\nLeather Seats Available : "<<(leatherSeats ? "Available":"Not Available");
+    }
+};
+
+class PremiumCar :public Car,public PremiumFeatures{
+    public:
+    PremiumCar(int id, string b, string m,float p,string f):Car(id,b,m,p,f),PremiumFeatures(){
+    }
+    void displayPremiumCarDetails(){
+        displayDetails_car();
+        displayPremiumFeatures();
+    }
+};
+
 int main(){
     Scooter s(1234,"Activa","120M",70000,"Petrol");
     s.displayDetails_scooter();
@@ -134,6 +159,8 @@ int main(){
     i.displayDetails_insurance();
     ElectricCar e(0001,"honda","TSK20",300000,"No fuel",90);
     e.displayDetails_electricCar();
+    PremiumCar pc(101, "Honda", "City", 1500000, "Petrol");
+    pc.displayPremiumCarDetails();
     return 0;
     
 }
