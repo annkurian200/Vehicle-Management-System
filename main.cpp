@@ -1,5 +1,6 @@
 #include<iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 class Vehicle{
@@ -207,7 +208,7 @@ int main(){
     c.displayDetails();
     cout<<"\nAfter updating price";
     c.updatePrice(100000);
-    c.displayDetails();*/
+    c.displayDetails();
     //Abstract class
     Car c(101, "Honda", "City", 150000, "Petrol");
     c.displayDetails();
@@ -217,6 +218,37 @@ int main(){
     //if v object is created using vehicle class it will give error
     //because it is a abstract class and abstract class cannot create objects
     //Vehicle v(101, "Honda", "City", 150000);
-    //v.displayBasicDetails();
-    return 0;
+    //v.displayBasicDetails();*/
+    ofstream writefile("vehicles.txt");
+    if(writefile.is_open()){
+        writefile<<"101, Honda, City, 1500000"<<endl;
+        writefile<<"102, Bajaj, Pulsar, 100000"<<endl;
+
+        writefile.close();
+        cout<<"Vehicle data saved successfully"<<endl;
+    }
+    else{
+        cout<<"Error opening file!"<<endl;
+    }
+    ofstream appendFile("vehicles.txt",ios::app);
+    if(appendFile.is_open()){
+        appendFile<<"103, Honda, Activa, 70000"<<endl;
+        appendFile.close();
+        cout<<"New vehicle added successfully!"<<endl;
+    }
+    else{
+        cout<<"Error opening file!"<<endl;
+    }
+    ifstream readFile("vehicles.txt");
+    string line;
+    if(readFile.is_open()){
+        cout<<"---Vehicle Records---"<<endl;
+        while(getline(readFile,line)){
+            cout<<line<<endl;
+        }
+        readFile.close();
+    }
+    else{
+        cout<<"Error opening file!"<<endl;
+    }
 }
