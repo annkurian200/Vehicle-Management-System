@@ -1,6 +1,7 @@
 #include<iostream>
 #include <string>
 #include <fstream>
+#include<stdexcept>
 using namespace std;
 
 class Vehicle{
@@ -37,6 +38,9 @@ class Vehicle{
         available=status;
     }
     void updatePrice(float price){
+        if(price<=0){
+            throw invalid_argument("Price must be greater than 0"); 
+        }
         this->price=price;
     }
     void displayBasicDetails(){
@@ -201,14 +205,21 @@ int main(){
     v = &b;
     v->displayDetails();
     v = &s;
-    v->displayDetails();
+    v->displayDetails();*/
+
     //this pointer
     Car c(101, "Honda", "City", 150000, "Petrol");
     cout<<"\nBefore updating price";
     c.displayDetails();
-    cout<<"\nAfter updating price";
-    c.updatePrice(100000);
+    try{
+    cout<<"\nAfter updating price"<<endl;
+    c.updatePrice(0);
     c.displayDetails();
+    }
+    catch(invalid_argument &e){
+        cout<<"Error! "<<e.what()<<endl;
+    }
+/*
     //Abstract class
     Car c(101, "Honda", "City", 150000, "Petrol");
     c.displayDetails();
@@ -218,7 +229,7 @@ int main(){
     //if v object is created using vehicle class it will give error
     //because it is a abstract class and abstract class cannot create objects
     //Vehicle v(101, "Honda", "City", 150000);
-    //v.displayBasicDetails();*/
+    //v.displayBasicDetails();
     ofstream writefile("vehicles.txt");
     if(writefile.is_open()){
         writefile<<"101, Honda, City, 1500000"<<endl;
@@ -250,5 +261,6 @@ int main(){
     }
     else{
         cout<<"Error opening file!"<<endl;
-    }
+    }*/
+    
 }
