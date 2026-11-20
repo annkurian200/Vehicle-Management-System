@@ -142,8 +142,7 @@ class ElectricCar:public Car{
     }
     void displayDetails() override{
         Car::displayDetails();
-        cout<<"Electric Car Kilometers : "<<kilometers;
-        cout<<endl;
+        cout<<"Electric Car Kilometers : "<<kilometers<<endl;
     }
 };
 
@@ -225,8 +224,8 @@ void addVehicle(){
             break;
         case 4: 
             cout<<"\n5.Fuel type:";
-            cout<<"\n6.Kilometers:";
             cin>>fuel_type;
+            cout<<"\n6.Kilometers:";
             cin>>kilometers;
             cout<<"Electric Car selected"<<endl;
             vehicles[count]=new ElectricCar(id,brand,model,price,fuel_type,kilometers);
@@ -243,6 +242,18 @@ void addVehicle(){
             cout<<"Invalid choice!"<<endl;
     }
     count++;
+}
+void displayVehicles(){
+    if(count==0){
+        cout<<"No vehicles available"<<endl;
+        return;
+    }
+    cout<<"\n======Vehicle Records=======\n";
+    for(int i=0;i<count;i++){
+        cout<<"\nVehicle-"<<i+1;
+        vehicles[i]->displayDetails();
+    }
+    cout<<"\n-----------------------------\n";
 }
 
 
@@ -355,6 +366,9 @@ int main(){
                 break;
             case 1:
                 addVehicle();
+                break;
+            case 2:
+                displayVehicles();
                 break;
             default:
                 cout<<"Invalid Choice!"<<endl;
